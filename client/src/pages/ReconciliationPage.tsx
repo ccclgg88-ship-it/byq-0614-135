@@ -162,7 +162,7 @@ export default function ReconciliationPage() {
           <Tag color={record.isAlert ? 'red' : 'default'} style={{ fontSize: 12 }}>
             {record.planType}
           </Tag>
-          <span style={{ color: record.isAlert ? '#ff4d4f' : 'rgba(0,0,0,0.85)' }}>
+          <span style={{ color: record.isAlert ? '#ff7875' : 'rgba(255,255,255,0.85)' }}>
             {email}
           </span>
         </Space>

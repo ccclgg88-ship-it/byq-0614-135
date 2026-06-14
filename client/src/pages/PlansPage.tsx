@@ -289,7 +289,7 @@ export default function PlansPage({ userId, onPlanChange }: Props) {
       </Row>
 
       <Modal
-        title={<span style={{ color: '#000' }}>确认支付</span>}
+        title="确认支付"
         open={payModalOpen}
         onCancel={() => !paying && setPayModalOpen(false)}
         footer={null}
@@ -299,48 +299,48 @@ export default function PlansPage({ userId, onPlanChange }: Props) {
           <div>
             <Card
               style={{
-                background: 'linear-gradient(135deg, rgba(146,84,222,0.08), rgba(240,147,251,0.08))',
-                border: '1px solid rgba(146,84,222,0.2)',
+                background: 'linear-gradient(135deg, rgba(146,84,222,0.12), rgba(240,147,251,0.1))',
+                border: '1px solid rgba(146,84,222,0.3)',
                 marginBottom: 24,
               }}
             >
               <Row justify="space-between" align="middle">
                 <div>
-                  <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 4 }}>
+                  <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 4, color: '#fff' }}>
                     {plans.find((p) => p.type === selectedPlan)!.name}
                   </div>
-                  <div style={{ color: 'rgba(0,0,0,0.55)', fontSize: 13 }}>
+                  <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13 }}>
                     每日 {plans.find((p) => p.type === selectedPlan)!.dailyLimit} 条指令 / 每月{' '}
                     {plans.find((p) => p.type === selectedPlan)!.monthlyLimit} 条指令
                   </div>
                 </div>
-                <div style={{ fontSize: 32, fontWeight: 800, color: '#9254de' }}>
+                <div style={{ fontSize: 32, fontWeight: 800, color: '#d3adf7' }}>
                   ¥{plans.find((p) => p.type === selectedPlan)!.price}
                 </div>
               </Row>
             </Card>
 
             <div style={{ marginBottom: 24 }}>
-              <div style={{ color: 'rgba(0,0,0,0.65)', marginBottom: 12, fontSize: 14 }}>
+              <div style={{ color: 'rgba(255,255,255,0.7)', marginBottom: 12, fontSize: 14, fontWeight: 500 }}>
                 选择支付方式
               </div>
               <Row gutter={[12, 12]}>
                 <Col xs={12}>
                   <Card
                     hoverable
-                    style={{ cursor: 'pointer', border: '2px solid #07c160' }}
+                    style={{ cursor: 'pointer', border: '2px solid #07c160', background: 'rgba(7,193,96,0.08)' }}
                   >
                     <Space>
                       <WechatOutlined style={{ color: '#07c160', fontSize: 24 }} />
-                      <span style={{ fontWeight: 600 }}>微信支付</span>
+                      <span style={{ fontWeight: 600, color: '#fff' }}>微信支付</span>
                     </Space>
                   </Card>
                 </Col>
                 <Col xs={12}>
-                  <Card hoverable style={{ cursor: 'pointer' }}>
+                  <Card hoverable style={{ cursor: 'pointer', background: 'rgba(22,119,255,0.08)', border: '1px solid rgba(22,119,255,0.3)' }}>
                     <Space>
                       <AlibabaOutlined style={{ color: '#1677ff', fontSize: 24 }} />
-                      <span style={{ fontWeight: 600 }}>支付宝</span>
+                      <span style={{ fontWeight: 600, color: '#fff' }}>支付宝</span>
                     </Space>
                   </Card>
                 </Col>
@@ -369,7 +369,7 @@ export default function PlansPage({ userId, onPlanChange }: Props) {
                 marginTop: 12,
                 textAlign: 'center',
                 fontSize: 12,
-                color: 'rgba(0,0,0,0.45)',
+                color: 'rgba(255,255,255,0.45)',
               }}
             >
               <SafetyCertificateOutlined /> 支付数据全程加密，Mock 环境仅供演示

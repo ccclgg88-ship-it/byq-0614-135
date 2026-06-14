@@ -153,7 +153,7 @@ export default function UserCenterPage({ userId }: Props) {
       ellipsis: true,
       render: (id: string) => (
         <Tooltip title={id}>
-          <code style={{ color: 'rgba(0,0,0,0.65)', fontSize: 12 }}>
+          <code style={{ color: '#d3adf7', fontSize: 12 }}>
             {id?.slice(0, 16)}...
           </code>
         </Tooltip>

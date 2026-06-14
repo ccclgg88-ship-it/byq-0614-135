@@ -341,7 +341,7 @@ export default function RiskControlPage() {
       </Card>
 
       <Modal
-        title={<span style={{ color: '#000' }}>手动冻结用户</span>}
+        title="手动冻结用户"
         open={freezeModalOpen}
         onCancel={() => !actionLoading && setFreezeModalOpen(false)}
         onOk={confirmFreeze}
@@ -351,13 +351,13 @@ export default function RiskControlPage() {
       >
         <div>
           <div style={{ marginBottom: 16 }}>
-            <div style={{ marginBottom: 8, color: 'rgba(0,0,0,0.65)' }}>用户ID</div>
-            <code style={{ background: '#f5f5f5', padding: '8px 12px', borderRadius: 4 }}>
+            <div style={{ marginBottom: 8, color: 'rgba(255,255,255,0.55)' }}>用户ID</div>
+            <code style={{ background: 'rgba(255,255,255,0.08)', padding: '8px 12px', borderRadius: 4, color: '#d3adf7' }}>
               {freezeTarget}
             </code>
           </div>
           <div style={{ marginBottom: 16 }}>
-            <div style={{ marginBottom: 8, color: 'rgba(0,0,0,0.65)' }}>冻结时长（小时）</div>
+            <div style={{ marginBottom: 8, color: 'rgba(255,255,255,0.55)' }}>冻结时长（小时）</div>
             <Input
               type="number"
               min={1}
@@ -367,7 +367,7 @@ export default function RiskControlPage() {
               addonAfter="小时"
             />
           </div>
-          <div style={{ color: '#ff4d4f', fontSize: 13 }}>
+          <div style={{ color: '#ff7875', fontSize: 13 }}>
             ⚠️ 冻结期间用户只能查看历史消息，不能发送新指令
           </div>
         </div>
