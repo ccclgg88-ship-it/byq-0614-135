@@ -1,0 +1,90 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: succubus-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: succubus_quota
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: succubus-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --requirepass ""
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: succubus-server
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/succubus_quota
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=0
+      - PORT=3001
+      - APP_URL=http://localhost:5173
+      - MONTHLY_PRICE_PER_MESSAGE=0.05
+      - YEARLY_PRICE_PER_MESSAGE=0.033
+      - RECONCILIATION_ALERT_THRESHOLD=0.1
+      - STRIPE_WEBHOOK_SECRET=whsec_test_mock
+      - STRIPE_API_KEY=sk_test_mock
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./server/src:/app/src
+      - ./shared:/app/shared
+      - server_reports:/app/reports
+    command: >
+      sh -c "bunx prisma generate &&
+             bunx prisma migrate deploy || true &&
+             bun run start"
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: succubus-client
+    restart: always
+    ports:
+      - "5173:80"
+    depends_on:
+      - server
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  server_reports:
+    driver: local

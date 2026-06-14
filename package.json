@@ -1,0 +1,21 @@
+{
+  "name": "succubus-quota-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "魅魔对话订阅与指令配额系统",
+  "scripts": {
+    "dev:server": "cd server && bun run dev",
+    "dev:client": "cd client && bun run dev",
+    "build:server": "cd server && bun run build",
+    "build:client": "cd client && bun run build",
+    "test": "cd server && bun run test",
+    "reconcile": "cd server && bun run reconcile",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down"
+  },
+  "workspaces": [
+    "server",
+    "client",
+    "shared"
+  ]
+}
